@@ -1,0 +1,19 @@
+[package]
+name = "iced_apple_theme"
+version = "0.1.0"
+edition = "2021"
+description = "Apple-inspired theme for iced-rs"
+license = "MIT"
+repository = ""
+readme = "README.md"
+keywords = ["iced", "gui", "apple", "theme", "palette"]
+categories = ["gui"]
+
+[dependencies]
+iced = "0.13.1"
+palette = "0.7.5" 
+
+
+[[example]]
+name = "showcase"
+path = "examples\\showcase.rs"
