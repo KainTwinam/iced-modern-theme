@@ -1,12 +1,12 @@
-# Iced Apple Inspired Theme
+# Iced Modern Inspired Theme
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-A comprehensive Apple-inspired theme for [Iced](https://github.com/iced-rs/iced), the cross-platform GUI library for Rust.
+A comprehensive Modern-inspired theme for [Iced](https://github.com/iced-rs/iced), the cross-platform GUI library for Rust.
 
 ## Features
 
-- Complete set of Apple like system colors for both light and dark modes
-- Styled components matching Apple's design language:
+- Complete set of Modern like system colors for both light and dark modes
+- Styled components matching Modern's design language:
   - Buttons (primary, secondary, tinted, etc.)
   - Text inputs (standard, search, inline)
   - Containers (card, sheet, sidebar, etc.)
@@ -29,14 +29,14 @@ palette = "0.7.5"
 
 ```rust
 use iced::{Application, Settings, Theme};
-use iced_apple_theme::Apple;
+use iced_Modern_theme::Modern;
 
 struct MyApp {
     theme: Theme,
     // ...
 }
 
-impl Application for MyApp {
+impl MyApp {
     // ...
     
     fn theme(&self) -> Theme {
@@ -47,10 +47,9 @@ impl Application for MyApp {
 }
 
 fn main() -> iced::Result {
-    MyApp::run(Settings {
-        default_theme: Some(Apple::light_theme()),
-        // ...
-    })
+    iced::application("MyApp Title", MyApp::update, MyApp::view)
+        .theme(MyApp::theme)
+        .run_with(MyApp::new)
 }
 ```
 
@@ -60,91 +59,91 @@ fn main() -> iced::Result {
 
 ```rust
 use iced::widget::Button;
-use iced_apple_theme::Apple;
+use iced_Modern_theme::Modern;
 
 // Primary button (blue filled)
 Button::new("Primary")
-    .style(Apple::primary_button());
+    .style(Modern::primary_button());
 
 // Secondary button (outlined)
 Button::new("Secondary")
-    .style(Apple::secondary_button());
+    .style(Modern::secondary_button());
 
 // Success button (green)
 Button::new("Success")
-    .style(Apple::success_button());
+    .style(Modern::success_button());
 
 // Warning button (orange/yellow)
 Button::new("Warning")
-    .style(Apple::warning_button());
+    .style(Modern::warning_button());
 
 // Danger button (red)
 Button::new("Danger")
-    .style(Apple::danger_button());
+    .style(Modern::danger_button());
 
 // Tinted button (semi-transparent colored background)
 Button::new("Tinted")
-    .style(Apple::blue_tinted_button());
+    .style(Modern::blue_tinted_button());
 ```
 
 ### Container Styles
 
 ```rust
 use iced::widget::Container;
-use iced_apple_theme::Apple;
+use iced_Modern_theme::Modern;
 
 // Card container (with shadow and rounded corners)
 Container::new(content)
-    .style(Apple::card_container());
+    .style(Modern::card_container());
 
 // Sheet container (modal-like appearance)
 Container::new(content)
-    .style(Apple::sheet_container());
+    .style(Modern::sheet_container());
 
 // Floating container (elevated with shadow)
 Container::new(content)
-    .style(Apple::floating_container());
+    .style(Modern::floating_container());
 ```
 
 ### Text Input Styles
 
 ```rust
 use iced::widget::TextInput;
-use iced_apple_theme::Apple;
+use iced_Modern_theme::Modern;
 
 // Standard text input
 TextInput::new("Placeholder", &value)
-    .style(Apple::text_input());
+    .style(Modern::text_input());
 
 // Search input with rounded corners
 TextInput::new("Search...", &value)
-    .style(Apple::search_input());
+    .style(Modern::search_input());
 
 // Inline text input with bottom border only
 TextInput::new("Inline input", &value)
-    .style(Apple::inline_text_input());
+    .style(Modern::inline_text_input());
 ```
 
 ### Text Styles
 
 ```rust
 use iced::widget::Text;
-use iced_apple_theme::Apple;
+use iced_Modern_theme::Modern;
 
 // Primary text (main content)
 Text::new("Primary text")
-    .style(Apple::primary_text());
+    .style(Modern::primary_text());
 
 // Secondary text (supporting information)
 Text::new("Secondary text")
-    .style(Apple::secondary_text());
+    .style(Modern::secondary_text());
 
 // Colored text
 Text::new("Red error message")
-    .style(Apple::red_text());
+    .style(Modern::red_text());
 
 Text::new("Blue information")
-    .style(Apple::blue_text());
+    .style(Modern::blue_text());
 ```
 
 ## Showcase Example
@@ -161,15 +160,15 @@ The theme automatically adapts to light and dark mode. You can explicitly set th
 
 ```rust
 // Light mode
-let light_theme = Apple::light_theme();
+let light_theme = Modern::light_theme();
 
 // Dark mode
-let dark_theme = Apple::dark_theme();
+let dark_theme = Modern::dark_theme();
 ```
 
 ## Available Colors
 
-The theme includes all standard Apple system colors:
+The theme includes all standard Modern system colors:
 
 - **Primary Colors**: Red, Orange, Yellow, Green, Mint, Teal, Cyan, Blue, Indigo, Purple, Pink, Brown
 - **Gray Scale**: Multiple levels of gray for UI elements
@@ -179,24 +178,24 @@ Each color has appropriate light and dark mode variants that are automatically s
 
 ## Custom Components
 
-You can create custom components using the Apple styling functions:
+You can create custom components using the Modern styling functions:
 
 ```rust
 // Custom button style
 let my_custom_button = button(row![icon, text("Custom Button")])
-    .style(Apple::primary_button())
+    .style(Modern::primary_button())
     .padding(8);
 
 // Custom container
 let my_custom_panel = container(content)
-    .style(Apple::card_container())
+    .style(Modern::card_container())
     .padding(15)
     .width(Length::Fill);
 ```
 
 ## Credits
 
-This theme is inspired by Apple's Human Interface Guidelines and design system. It aims to provide a familiar and polished look for applications built with Iced.
+This theme is inspired by Apples's Human Interface Guidelines and design system. It aims to provide a familiar and polished look for applications built with Iced.
 
 ## License
 
