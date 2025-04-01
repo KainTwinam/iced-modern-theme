@@ -1,15 +1,15 @@
-//! Apple color system definitions.
+//! Modern color system definitions.
 //!
-//! This module provides all the standard colors from Apple's design system,
+//! This module provides all the standard colors from Modern's design system,
 //! organized into namespaces for both light and dark modes.
 
 use iced::Color;
 
-/// Complete Apple system color palette
+/// Complete Modern system color palette
 pub mod colors {
     use iced::Color;
     
-    /// iOS/iPadOS system colors - standard variants
+    /// mobile system colors - standard variants
     pub mod system {
         use iced::Color;
         
@@ -229,16 +229,16 @@ pub mod colors {
 }
 
 // Common color constants for backward compatibility
-pub const APPLE_BLUE_LIGHT: Color = colors::system::BLUE;     
-pub const APPLE_BLUE_DARK: Color = colors::system::BLUE_DARK;
-pub const APPLE_GREEN_LIGHT: Color = colors::system::GREEN;
-pub const APPLE_GREEN_DARK: Color = colors::system::GREEN_DARK;
-pub const APPLE_ORANGE_LIGHT: Color = colors::system::ORANGE;
-pub const APPLE_ORANGE_DARK: Color = colors::system::ORANGE_DARK;
-pub const APPLE_RED_LIGHT: Color = colors::system::RED;
-pub const APPLE_RED_DARK: Color = colors::system::RED_DARK;
+pub const MODERN_BLUE_LIGHT: Color = colors::system::BLUE;     
+pub const MODERN_BLUE_DARK: Color = colors::system::BLUE_DARK;
+pub const MODERN_GREEN_LIGHT: Color = colors::system::GREEN;
+pub const MODERN_GREEN_DARK: Color = colors::system::GREEN_DARK;
+pub const MODERN_ORANGE_LIGHT: Color = colors::system::ORANGE;
+pub const MODERN_ORANGE_DARK: Color = colors::system::ORANGE_DARK;
+pub const MODERN_RED_LIGHT: Color = colors::system::RED;
+pub const MODERN_RED_DARK: Color = colors::system::RED_DARK;
 
-/// Complete set of theme colors used across the Apple-styled UI
+/// Complete set of theme colors used across the Modern-styled UI
 pub struct ThemeColors {
     // Primary colors
     pub blue: Color,

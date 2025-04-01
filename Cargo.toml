@@ -1,12 +1,12 @@
 [package]
-name = "iced_apple_theme"
+name = "iced_modern_theme"
 version = "0.1.0"
 edition = "2021"
-description = "Apple-inspired theme for iced-rs"
+description = "Modern theme for iced-rs"
 license = "MIT"
 repository = ""
 readme = "README.md"
-keywords = ["iced", "gui", "apple", "theme", "palette"]
+keywords = ["iced", "gui", "modern", "theme", "palette"]
 categories = ["gui"]
 
 [dependencies]

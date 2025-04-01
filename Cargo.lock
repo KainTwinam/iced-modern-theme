@@ -1372,14 +1372,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "iced_apple_theme"
-version = "0.1.0"
-dependencies = [
- "iced",
- "palette",
-]
-
-[[package]]
 name = "iced_core"
 version = "0.13.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1444,6 +1436,14 @@ dependencies = [
  "rustc-hash 2.1.1",
  "thiserror",
  "unicode-segmentation",
+]
+
+[[package]]
+name = "iced_modern_theme"
+version = "0.1.0"
+dependencies = [
+ "iced",
+ "palette",
 ]
 
 [[package]]

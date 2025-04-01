@@ -21,4 +21,4 @@ pub use styles::*;
 pub use theme::*;
 
 /// Re-export the Apple struct as the main entry point for the library
-pub use theme::Apple;
+pub use theme::Modern;

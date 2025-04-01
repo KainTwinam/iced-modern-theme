@@ -1,11 +1,11 @@
-//! Apple theme implementation for Iced GUI components.
+//! Modern theme implementation for Iced GUI components.
 //!
-//! This module provides the main `Apple` struct and implementations
-//! for styling each Iced component with Apple-inspired designs.
+//! This module provides the main `Modern` struct and implementations
+//! for styling each Iced component with Modern-inspired designs.
 
 use iced::{Border, Color, Shadow, Theme, Background, Vector};
 
-/// Apple design-inspired text input style implementation
+/// Modern design-inspired text input style implementation
 fn text_input_style(theme: &Theme, status: TextInputStatus) -> text_input::Style {
     let colors = get_theme_colors(theme);
     
@@ -51,7 +51,7 @@ fn text_input_style(theme: &Theme, status: TextInputStatus) -> text_input::Style
     }
 }
 
-/// Apple design-inspired pick list style implementation
+/// Modern design-inspired pick list style implementation
 fn pick_list_style(theme: &Theme, status: pick_list::Status) -> pick_list::Style {
     let colors = get_theme_colors(theme);
     
@@ -89,15 +89,15 @@ fn pick_list_style(theme: &Theme, status: pick_list::Status) -> pick_list::Style
     }
 }
 
-/// Apple design-inspired combo box style implementation
+/// Modern design-inspired combo box style implementation
 fn combo_box_style(theme: &Theme, status: TextInputStatus) -> text_input::Style {
     // For consistency, we use the same style as text input
     text_input_style(theme, status)
 }
 
-/// Create a complete Apple-styled theme
-fn create_apple_theme(dark_mode: bool) -> Theme {
-    let name = if dark_mode { "Apple Dark" } else { "Apple Light" };
+/// Create a complete Modern-styled theme
+fn create_Modern_theme(dark_mode: bool) -> Theme {
+    let name = if dark_mode { "Modern Dark" } else { "Modern Light" };
     
     // Define the base colors
     let (background, text) = if dark_mode {
@@ -106,11 +106,11 @@ fn create_apple_theme(dark_mode: bool) -> Theme {
         (Color::from_rgb(0.95, 0.95, 0.97), Color::BLACK) // #F2F2F7 (light bg)
     };
     
-    let primary = if dark_mode { APPLE_BLUE_DARK } else { APPLE_BLUE_LIGHT };
-    let success = if dark_mode { APPLE_GREEN_DARK } else { APPLE_GREEN_LIGHT };
-    let danger = if dark_mode { APPLE_RED_DARK } else { APPLE_RED_LIGHT };
+    let primary = if dark_mode { MODERN_BLUE_DARK } else { MODERN_BLUE_LIGHT };
+    let success = if dark_mode { MODERN_GREEN_DARK } else { MODERN_GREEN_LIGHT };
+    let danger = if dark_mode { MODERN_RED_DARK } else { MODERN_RED_LIGHT };
     
-    // Create the Apple theme
+    // Create the Modern theme
     Theme::custom(
         String::from(name),
         iced::theme::Palette {
@@ -123,7 +123,7 @@ fn create_apple_theme(dark_mode: bool) -> Theme {
     )
 }
 
-/// Apple design-inspired radio button style implementation
+/// Modern design-inspired radio button style implementation
 fn radio_style(theme: &Theme, status: radio::Status) -> radio::Style {
     let colors = get_theme_colors(theme);
     
@@ -151,7 +151,7 @@ fn radio_style(theme: &Theme, status: radio::Status) -> radio::Style {
     }
 }
 
-/// Apple design-inspired checkbox style implementation
+/// Modern design-inspired checkbox style implementation
 fn checkbox_style(theme: &Theme, status: checkbox::Status) -> checkbox::Style {
     let colors = get_theme_colors(theme);
     
@@ -234,7 +234,7 @@ fn checkbox_style(theme: &Theme, status: checkbox::Status) -> checkbox::Style {
     }
 }
 
-/// Apple design-inspired container style
+/// Modern design-inspired container style
 fn container_style(theme: &Theme, class: &style::Container) -> container::Style {
     let colors = get_theme_colors(theme);
     
@@ -251,7 +251,7 @@ fn container_style(theme: &Theme, class: &style::Container) -> container::Style 
                 text_color: Some(colors.text),
                 background: Some(Background::Color(colors.card_bg)),
                 border: Border {
-                    radius: 10.0.into(), // Apple's rounded card corners
+                    radius: 10.0.into(), // Modern rounded card corners
                     width: 0.0,
                     color: Color::TRANSPARENT,
                 },
@@ -274,7 +274,7 @@ fn container_style(theme: &Theme, class: &style::Container) -> container::Style 
                 text_color: Some(colors.text),
                 background: Some(Background::Color(sheet_bg)),
                 border: Border {
-                    radius: 12.0.into(), // Apple's rounded sheet corners
+                    radius: 12.0.into(), // Modern rounded sheet corners
                     width: 0.0,
                     color: Color::TRANSPARENT,
                 },
@@ -410,121 +410,121 @@ use iced::widget::text_input::Status as TextInputStatus;
 use crate::colors::*;
 use crate::styles::*;
 
-/// Apple theme utilities for styling iced widgets
-pub struct Apple;
+/// Modern theme utilities for styling iced widgets
+pub struct Modern;
 
-impl Apple {
-    /// Get an Apple-style theme for buttons
+impl Modern {
+    /// Get an Modern-style theme for buttons
     pub fn button<'a>(style: style::Button) -> impl Fn(&Theme, ButtonStatus) -> button::Style + 'a {
         move |theme, status| button_style(theme, &style, status)
     }
 
-    /// Get an Apple-style theme for primary buttons (blue)
+    /// Get an Modern-style theme for primary buttons (blue)
     pub fn primary_button<'a>() -> impl Fn(&Theme, ButtonStatus) -> button::Style + 'a {
         Self::button(style::Button::Primary)
     }
 
-    /// Get an Apple-style theme for secondary buttons (outlined)
+    /// Get an Modern-style theme for secondary buttons (outlined)
     pub fn secondary_button<'a>() -> impl Fn(&Theme, ButtonStatus) -> button::Style + 'a {
         Self::button(style::Button::Secondary)
     }
 
-    /// Get an Apple-style theme for success buttons (green)
+    /// Get an Modern-style theme for success buttons (green)
     pub fn success_button<'a>() -> impl Fn(&Theme, ButtonStatus) -> button::Style + 'a {
         Self::button(style::Button::Success)
     }
 
-    /// Get an Apple-style theme for warning buttons (orange)
+    /// Get an Modern-style theme for warning buttons (orange)
     pub fn warning_button<'a>() -> impl Fn(&Theme, ButtonStatus) -> button::Style + 'a {
         Self::button(style::Button::Warning)
     }
 
-    /// Get an Apple-style theme for danger buttons (red)
+    /// Get an Modern-style theme for danger buttons (red)
     pub fn danger_button<'a>() -> impl Fn(&Theme, ButtonStatus) -> button::Style + 'a {
         Self::button(style::Button::Danger)
     }
 
-    /// Get an Apple-style theme for link buttons (text-only)
+    /// Get an Modern-style theme for link buttons (text-only)
     pub fn link_button<'a>() -> impl Fn(&Theme, ButtonStatus) -> button::Style + 'a {
         Self::button(style::Button::Link)
     }
 
-    /// Get an Apple-style theme for system buttons (light gray)
+    /// Get an Modern-style theme for system buttons (light gray)
     pub fn system_button<'a>() -> impl Fn(&Theme, ButtonStatus) -> button::Style + 'a {
         Self::button(style::Button::System)
     }
 
-    /// Get an Apple-style theme for plain buttons (text only without link color)
+    /// Get an Modern-style theme for plain buttons (text only without link color)
     pub fn plain_button<'a>() -> impl Fn(&Theme, ButtonStatus) -> button::Style + 'a {
         Self::button(style::Button::Plain)
     }
 
-    /// Get an Apple-style theme for text inputs
+    /// Get an Modern-style theme for text inputs
     pub fn text_input<'a>() -> impl Fn(&Theme, TextInputStatus) -> text_input::Style + 'a {
         text_input_style
     }
 
-    /// Get an Apple-style theme for containers
+    /// Get an Modern-style theme for containers
     pub fn container<'a>(style: style::Container) -> impl Fn(&Theme) -> container::Style + 'a {
         move |theme| container_style(theme, &style)
     }
 
-    /// Get an Apple-style theme for card containers
+    /// Get an Modern-style theme for card containers
     pub fn card_container<'a>() -> impl Fn(&Theme) -> container::Style + 'a {
         Self::container(style::Container::Card)
     }
 
-    /// Get an Apple-style theme for sheet containers
+    /// Get an Modern-style theme for sheet containers
     pub fn sheet_container<'a>() -> impl Fn(&Theme) -> container::Style + 'a {
         Self::container(style::Container::Sheet)
     }
 
-    /// Get an Apple-style theme for group containers
+    /// Get an Modern-style theme for group containers
     pub fn group_container<'a>() -> impl Fn(&Theme) -> container::Style + 'a {
         Self::container(style::Container::Group)
     }
 
-    /// Get an Apple-style theme for sidebar containers
+    /// Get an Modern-style theme for sidebar containers
     pub fn sidebar_container<'a>() -> impl Fn(&Theme) -> container::Style + 'a {
         Self::container(style::Container::Sidebar)
     }
 
-    /// Get an Apple-style theme for radio buttons
+    /// Get an Modern-style theme for radio buttons
     pub fn radio<'a>() -> impl Fn(&Theme, radio::Status) -> radio::Style + 'a {
         radio_style
     }
 
-    /// Get an Apple-style theme for checkboxes
+    /// Get an Modern-style theme for checkboxes
     pub fn checkbox<'a>() -> impl Fn(&Theme, checkbox::Status) -> checkbox::Style + 'a {
         checkbox_style
     }
 
-    /// Get an Apple-style theme for pick lists
+    /// Get an Modern-style theme for pick lists
     pub fn pick_list<'a>() -> impl Fn(&Theme, pick_list::Status) -> pick_list::Style + 'a {
         pick_list_style
     }
 
-    /// Get an Apple-style theme for combo boxes
+    /// Get an Modern-style theme for combo boxes
     pub fn combo_box<'a>() -> impl Fn(&Theme, TextInputStatus) -> text_input::Style + 'a {
         combo_box_style
     }
 
-    /// Create a complete Apple-styled theme
+    /// Create a complete Modern-styled theme
     pub fn theme(dark_mode: bool) -> Theme {
-        create_apple_theme(dark_mode)
+        create_Modern_theme(dark_mode)
     }
 
-    /// Create a light Apple-styled theme
+    /// Create a light Modern-styled theme
     pub fn light_theme() -> Theme {
         Self::theme(false)
     }
 
-    /// Create a dark Apple-styled theme
+    /// Create a dark Modern-styled theme
     pub fn dark_theme() -> Theme {
         Self::theme(true)
     }
 
-    // Additional button styles using more Apple colors
+    // Additional button styles using more Modern colors
     
     /// Get a teal button style (cyan-blue)
     pub fn teal_button<'a>() -> impl Fn(&Theme, ButtonStatus) -> button::Style + 'a {
@@ -532,7 +532,7 @@ impl Apple {
             let colors = get_theme_colors(theme);
             let is_dark = is_dark_mode(theme);
             
-            let apple_base = |color: Color, text_color: Color| button::Style {
+            let modern_base = |color: Color, text_color: Color| button::Style {
                 background: Some(Background::Color(color)),
                 text_color,
                 border: Border {
@@ -547,7 +547,7 @@ impl Apple {
                 },
             };
             
-            let base_style = apple_base(colors.teal, Color::WHITE);
+            let base_style = modern_base(colors.teal, Color::WHITE);
             
             match status {
                 ButtonStatus::Active => base_style,
@@ -564,7 +564,7 @@ impl Apple {
             let colors = get_theme_colors(theme);
             let is_dark = is_dark_mode(theme);
             
-            let apple_base = |color: Color, text_color: Color| button::Style {
+            let modern_base = |color: Color, text_color: Color| button::Style {
                 background: Some(Background::Color(color)),
                 text_color,
                 border: Border {
@@ -579,7 +579,7 @@ impl Apple {
                 },
             };
             
-            let base_style = apple_base(colors.indigo, Color::WHITE);
+            let base_style = modern_base(colors.indigo, Color::WHITE);
             
             match status {
                 ButtonStatus::Active => base_style,
@@ -596,7 +596,7 @@ impl Apple {
             let colors = get_theme_colors(theme);
             let is_dark = is_dark_mode(theme);
             
-            let apple_base = |color: Color, text_color: Color| button::Style {
+            let modern_base = |color: Color, text_color: Color| button::Style {
                 background: Some(Background::Color(color)),
                 text_color,
                 border: Border {
@@ -611,7 +611,7 @@ impl Apple {
                 },
             };
             
-            let base_style = apple_base(colors.purple, Color::WHITE);
+            let base_style = modern_base(colors.purple, Color::WHITE);
             
             match status {
                 ButtonStatus::Active => base_style,
@@ -628,7 +628,7 @@ impl Apple {
             let colors = get_theme_colors(theme);
             let is_dark = is_dark_mode(theme);
             
-            let apple_base = |color: Color, text_color: Color| button::Style {
+            let modern_base = |color: Color, text_color: Color| button::Style {
                 background: Some(Background::Color(color)),
                 text_color,
                 border: Border {
@@ -643,7 +643,7 @@ impl Apple {
                 },
             };
             
-            let base_style = apple_base(colors.pink, Color::WHITE);
+            let base_style = modern_base(colors.pink, Color::WHITE);
             
             match status {
                 ButtonStatus::Active => base_style,
@@ -654,7 +654,7 @@ impl Apple {
         }
     }
 
-     /// Get an Apple-style gray button (neutral, subdued appearance)
+     /// Get an Modern-style gray button (neutral, subdued appearance)
      pub fn gray_button<'a>() -> impl Fn(&Theme, ButtonStatus) -> button::Style + 'a {
         move |theme, status| {
             let colors = get_theme_colors(theme);
@@ -667,7 +667,7 @@ impl Apple {
                 colors::gray::GRAY4_LIGHT
             };
             
-            let apple_base = |color: Color, text_color: Color| button::Style {
+            let modern_base = |color: Color, text_color: Color| button::Style {
                 background: Some(Background::Color(color)),
                 text_color,
                 border: Border {
@@ -682,7 +682,7 @@ impl Apple {
                 },
             };
             
-            let base_style = apple_base(gray_color, colors.text);
+            let base_style = modern_base(gray_color, colors.text);
             
             match status {
                 ButtonStatus::Active => base_style,
@@ -693,7 +693,7 @@ impl Apple {
         }
     }
     
-    /// Get an Apple-style tinted button (semi-transparent colored background)
+    /// Get an Modern-style tinted button (semi-transparent colored background)
     pub fn tinted_button<'a>(color_variant: TintedButtonColor) -> impl Fn(&Theme, ButtonStatus) -> button::Style + 'a {
         move |theme, status| {
             let colors = get_theme_colors(theme);
@@ -720,7 +720,7 @@ impl Apple {
             };
             
             // For tinted buttons, we usually want a stronger text color
-            let apple_base = |color: Color, text_color: Color| button::Style {
+            let modern_base = |color: Color, text_color: Color| button::Style {
                 background: Some(Background::Color(color)),
                 text_color,
                 border: Border {
@@ -735,7 +735,7 @@ impl Apple {
                 },
             };
             
-            let base_style = apple_base(tinted_color, base_color); // Use the base color for text
+            let base_style = modern_base(tinted_color, base_color); // Use the base color for text
             
             match status {
                 ButtonStatus::Active => base_style,
@@ -746,42 +746,42 @@ impl Apple {
         }
     }
     
-    /// Get an Apple-style blue tinted button
+    /// Get an Modern-style blue tinted button
     pub fn blue_tinted_button<'a>() -> impl Fn(&Theme, ButtonStatus) -> button::Style + 'a {
         Self::tinted_button(TintedButtonColor::Blue)
     }
     
-    /// Get an Apple-style green tinted button
+    /// Get an Modern-style green tinted button
     pub fn green_tinted_button<'a>() -> impl Fn(&Theme, ButtonStatus) -> button::Style + 'a {
         Self::tinted_button(TintedButtonColor::Green)
     }
     
-    /// Get an Apple-style red tinted button
+    /// Get an Modern-style red tinted button
     pub fn red_tinted_button<'a>() -> impl Fn(&Theme, ButtonStatus) -> button::Style + 'a {
         Self::tinted_button(TintedButtonColor::Red)
     }
     
-    /// Get an Apple-style orange tinted button
+    /// Get an Modern-style orange tinted button
     pub fn orange_tinted_button<'a>() -> impl Fn(&Theme, ButtonStatus) -> button::Style + 'a {
         Self::tinted_button(TintedButtonColor::Orange)
     }
     
-    /// Get an Apple-style purple tinted button
+    /// Get an Modern-style purple tinted button
     pub fn purple_tinted_button<'a>() -> impl Fn(&Theme, ButtonStatus) -> button::Style + 'a {
         Self::tinted_button(TintedButtonColor::Purple)
     }
     
-    /// Get an Apple-style teal tinted button
+    /// Get an Modern-style teal tinted button
     pub fn teal_tinted_button<'a>() -> impl Fn(&Theme, ButtonStatus) -> button::Style + 'a {
         Self::tinted_button(TintedButtonColor::Teal)
     }
     
-    /// Get an Apple-style indigo tinted button
+    /// Get an Modern-style indigo tinted button
     pub fn indigo_tinted_button<'a>() -> impl Fn(&Theme, ButtonStatus) -> button::Style + 'a {
         Self::tinted_button(TintedButtonColor::Indigo)
     }
     
-    /// Get an Apple-style pink tinted button
+    /// Get an Modern-style pink tinted button
     pub fn pink_tinted_button<'a>() -> impl Fn(&Theme, ButtonStatus) -> button::Style + 'a {
         Self::tinted_button(TintedButtonColor::Pink)
     }
@@ -977,7 +977,7 @@ impl Apple {
         }
     }
 
-    /// Get an Apple-style primary text style (main content text)
+    /// Get an Modern-style primary text style (main content text)
     pub fn primary_text<'a>() -> impl Fn(&Theme) -> text::Style + 'a {
         |theme| {
             let colors = get_theme_colors(theme);
@@ -988,7 +988,7 @@ impl Apple {
         }
     }
     
-    /// Get an Apple-style secondary text style (supporting information)
+    /// Get an Modern-style secondary text style (supporting information)
     pub fn secondary_text<'a>() -> impl Fn(&Theme) -> text::Style + 'a {
         |theme| {
             let colors = get_theme_colors(theme);
@@ -999,7 +999,7 @@ impl Apple {
         }
     }
     
-    /// Get an Apple-style tertiary text style (less important information)
+    /// Get an Modern-style tertiary text style (less important information)
     pub fn tertiary_text<'a>() -> impl Fn(&Theme) -> text::Style + 'a {
         |theme| {
             let colors = get_theme_colors(theme);
@@ -1010,7 +1010,7 @@ impl Apple {
         }
     }
     
-    /// Get an Apple-style link text style
+    /// Get an Modern-style link text style
     pub fn link_text<'a>() -> impl Fn(&Theme) -> text::Style + 'a {
         |theme| {
             let colors = get_theme_colors(theme);
@@ -1036,57 +1036,57 @@ impl Apple {
         }
     }
     
-    /// Get text in Apple's red color
+    /// Get text in Modern's red color
     pub fn red_text<'a>() -> impl Fn(&Theme) -> text::Style + 'a {
         Self::colored_text(colors::system::RED, colors::system::RED_DARK)
     }
     
-    /// Get text in Apple's blue color
+    /// Get text in Modern's blue color
     pub fn blue_text<'a>() -> impl Fn(&Theme) -> text::Style + 'a {
         Self::colored_text(colors::system::BLUE, colors::system::BLUE_DARK)
     }
     
-    /// Get text in Apple's green color
+    /// Get text in Modern's green color
     pub fn green_text<'a>() -> impl Fn(&Theme) -> text::Style + 'a {
         Self::colored_text(colors::system::GREEN, colors::system::GREEN_DARK)
     }
     
-    /// Get text in Apple's orange color
+    /// Get text in Modern's orange color
     pub fn orange_text<'a>() -> impl Fn(&Theme) -> text::Style + 'a {
         Self::colored_text(colors::system::ORANGE, colors::system::ORANGE_DARK)
     }
     
-    /// Get text in Apple's yellow color
+    /// Get text in Modern's yellow color
     pub fn yellow_text<'a>() -> impl Fn(&Theme) -> text::Style + 'a {
         Self::colored_text(colors::system::YELLOW, colors::system::YELLOW_DARK)
     }
     
-    /// Get text in Apple's purple color
+    /// Get text in Modern's purple color
     pub fn purple_text<'a>() -> impl Fn(&Theme) -> text::Style + 'a {
         Self::colored_text(colors::system::PURPLE, colors::system::PURPLE_DARK)
     }
     
-    /// Get text in Apple's pink color
+    /// Get text in Modern's pink color
     pub fn pink_text<'a>() -> impl Fn(&Theme) -> text::Style + 'a {
         Self::colored_text(colors::system::PINK, colors::system::PINK_DARK)
     }
     
-    /// Get text in Apple's teal color
+    /// Get text in Modern's teal color
     pub fn teal_text<'a>() -> impl Fn(&Theme) -> text::Style + 'a {
         Self::colored_text(colors::system::TEAL, colors::system::TEAL_DARK)
     }
     
-    /// Get text in Apple's indigo color
+    /// Get text in Modern's indigo color
     pub fn indigo_text<'a>() -> impl Fn(&Theme) -> text::Style + 'a {
         Self::colored_text(colors::system::INDIGO, colors::system::INDIGO_DARK)
     }
     
-    /// Get text in Apple's mint color
+    /// Get text in Modern's mint color
     pub fn mint_text<'a>() -> impl Fn(&Theme) -> text::Style + 'a {
         Self::colored_text(colors::system::MINT, colors::system::MINT_DARK)
     }
     
-    /// Get text in Apple's brown color
+    /// Get text in Modern's brown color
     pub fn brown_text<'a>() -> impl Fn(&Theme) -> text::Style + 'a {
         Self::colored_text(colors::system::BROWN, colors::system::BROWN_DARK)
     }
@@ -1107,17 +1107,17 @@ impl Apple {
     }
 }
 
-/// Apple design-inspired button style implementation
+/// Modern design-inspired button style implementation
 fn button_style(theme: &Theme, class: &style::Button, status: ButtonStatus) -> button::Style {
     let colors = get_theme_colors(theme);
     let is_dark = is_dark_mode(theme);
     
-    // Function to create the base apple style with rounded corners
-    let apple_base = |color: Color, text_color: Color| button::Style {
+    // Function to create the base Modern style with rounded corners
+    let modern_base = |color: Color, text_color: Color| button::Style {
         background: Some(Background::Color(color)),
         text_color,
         border: Border {
-            radius: CORNER_RADIUS.into(), // Apple's rounded corners
+            radius: CORNER_RADIUS.into(), // Modern's rounded corners
             width: 0.0,         // No border for filled buttons
             color: Color::TRANSPARENT,
         },
@@ -1150,13 +1150,13 @@ fn button_style(theme: &Theme, class: &style::Button, status: ButtonStatus) -> b
     
     // Base style based on button class
     let base_style = match class {
-        style::Button::Primary => apple_base(colors.blue, Color::WHITE),
+        style::Button::Primary => modern_base(colors.blue, Color::WHITE),
         style::Button::Secondary => outlined(colors.blue, colors.blue),
-        style::Button::Success => apple_base(colors.green, Color::WHITE),
-        style::Button::Warning => apple_base(colors.orange, if is_dark { Color::BLACK } else { Color::WHITE }),
-        style::Button::Danger => apple_base(colors.red, Color::WHITE),
+        style::Button::Success => modern_base(colors.green, Color::WHITE),
+        style::Button::Warning => modern_base(colors.orange, if is_dark { Color::BLACK } else { Color::WHITE }),
+        style::Button::Danger => modern_base(colors.red, Color::WHITE),
         style::Button::Link => transparent(colors.blue),
-        style::Button::System => apple_base(colors.system_bg, colors.text),
+        style::Button::System => modern_base(colors.system_bg, colors.text),
         style::Button::Plain => transparent(colors.text),
     };
     
@@ -1165,7 +1165,7 @@ fn button_style(theme: &Theme, class: &style::Button, status: ButtonStatus) -> b
         ButtonStatus::Active => base_style,
         
         ButtonStatus::Hovered => {
-            // For Apple style, make buttons slightly lighter/darker on hover
+            // For Modern style, make buttons slightly lighter/darker on hover
             let adjust_color = |color: Color| -> Color {
                 if is_dark {
                     // Lighten in dark mode
@@ -1232,7 +1232,7 @@ fn button_style(theme: &Theme, class: &style::Button, status: ButtonStatus) -> b
             
             let mut pressed_style = base_style;
             
-            // Remove shadow when pressed (Apple's buttons appear to press down)
+            // Remove shadow when pressed (Modern's buttons appear to press down)
             pressed_style.shadow = Shadow::default();
             
             match class {

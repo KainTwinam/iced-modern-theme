@@ -4,16 +4,16 @@ use iced::widget::{
     horizontal_space, radio, checkbox, pick_list, scrollable
 };
 
-use iced_apple_theme::Apple;
-use iced_apple_theme::colors::colors;
+use iced_modern_theme::Modern;
+use iced_modern_theme::colors::colors;
 
 fn main() -> iced::Result {
-    iced::application("Apple Theme & Colors Showcase", AppleThemeDemo::update, AppleThemeDemo::view)
-        .theme(AppleThemeDemo::theme)
-        .run_with(AppleThemeDemo::new)
+    iced::application("Modern Theme & Colors Showcase", ModernThemeDemo::update, ModernThemeDemo::view)
+        .theme(ModernThemeDemo::theme)
+        .run_with(ModernThemeDemo::new)
 }
 
-struct AppleThemeDemo {
+struct ModernThemeDemo {
     theme: Theme,
     theme_choice: ThemeChoice,
     text_value: String,
@@ -39,7 +39,7 @@ enum RadioOption {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum Fruit {
-    Apple,
+    Modern,
     Banana,
     Orange,
     Pear,
@@ -66,10 +66,10 @@ enum Message {
     PlainClicked,
 }
 
-impl AppleThemeDemo {
+impl ModernThemeDemo {
     fn new() -> (Self, Task<Message>) {
-        let app = AppleThemeDemo {
-            theme: Apple::light_theme(),
+        let app = ModernThemeDemo {
+            theme: Modern::light_theme(),
             theme_choice: ThemeChoice::Light,
             text_value: String::new(),
             checkbox_value: false,
@@ -87,8 +87,8 @@ impl AppleThemeDemo {
             Message::ThemeChanged(choice) => {
                 self.theme_choice = choice;
                 self.theme = match choice {
-                    ThemeChoice::Light => Apple::light_theme(),
-                    ThemeChoice::Dark => Apple::dark_theme(),
+                    ThemeChoice::Light => Modern::light_theme(),
+                    ThemeChoice::Dark => Modern::dark_theme(),
                 };
                 
                 // Request a redraw to ensure all components update with new theme
@@ -134,7 +134,7 @@ impl AppleThemeDemo {
     fn view(&self) -> Element<Message> {
         // Header section
         let header = container(
-            text("Apple-style Theme & Colors Showcase")
+            text("Modern-style Theme & Colors Showcase")
                 .size(30)
         ).center_x(Length::Fill)
         .width(Length::Fill)
@@ -146,10 +146,10 @@ impl AppleThemeDemo {
                 text("Theme:").size(16),
                 horizontal_space().width(10),
                 radio("Light", ThemeChoice::Light, Some(self.theme_choice), Message::ThemeChanged)
-                    .style(Apple::radio()),
+                    .style(Modern::radio()),
                 horizontal_space().width(10),
                 radio("Dark", ThemeChoice::Dark, Some(self.theme_choice), Message::ThemeChanged)
-                    .style(Apple::radio()),
+                    .style(Modern::radio()),
             ]
         )
         .padding(10)
@@ -207,7 +207,7 @@ impl AppleThemeDemo {
                 ],
             ]
         )
-        .style(Apple::card_container())
+        .style(Modern::card_container())
         .padding(15)
         .width(Length::Fill);
 
@@ -221,14 +221,14 @@ impl AppleThemeDemo {
                 row![
                     container(
                         button("Primary")
-                            .style(Apple::primary_button())
+                            .style(Modern::primary_button())
                             .on_press(Message::PrimaryClicked)
                     )
                     .width(Length::Fill),
                     
                     container(
                         button("Secondary")
-                            .style(Apple::secondary_button())
+                            .style(Modern::secondary_button())
                             .on_press(Message::SecondaryClicked)
                     )
                     .width(Length::Fill),
@@ -239,14 +239,14 @@ impl AppleThemeDemo {
                 row![
                     container(
                         button("Success")
-                            .style(Apple::success_button())
+                            .style(Modern::success_button())
                             .on_press(Message::SuccessClicked)
                     )
                     .width(Length::Fill),
                     
                     container(
                         button("Warning")
-                            .style(Apple::warning_button())
+                            .style(Modern::warning_button())
                             .on_press(Message::WarningClicked)
                     )
                     .width(Length::Fill),
@@ -257,14 +257,14 @@ impl AppleThemeDemo {
                 row![
                     container(
                         button("Danger")
-                            .style(Apple::danger_button())
+                            .style(Modern::danger_button())
                             .on_press(Message::DangerClicked)
                     )
                     .width(Length::Fill),
                     
                     container(
                         button("System")
-                            .style(Apple::system_button())
+                            .style(Modern::system_button())
                             .on_press(Message::SystemClicked)
                     )
                     .width(Length::Fill),
@@ -275,14 +275,14 @@ impl AppleThemeDemo {
                 row![
                     container(
                         button("Link Button")
-                            .style(Apple::link_button())
+                            .style(Modern::link_button())
                             .on_press(Message::LinkClicked)
                     )
                     .width(Length::Fill),
                     
                     container(
                         button("Plain Text")
-                            .style(Apple::plain_button())
+                            .style(Modern::plain_button())
                             .on_press(Message::PlainClicked)
                     )
                     .width(Length::Fill),
@@ -296,13 +296,13 @@ impl AppleThemeDemo {
                 row![
                     container(
                         button("Primary")
-                            .style(Apple::primary_button())
+                            .style(Modern::primary_button())
                     )
                     .width(Length::Fill),
                     
                     container(
                         button("Secondary")
-                            .style(Apple::secondary_button())
+                            .style(Modern::secondary_button())
                     )
                     .width(Length::Fill),
                 ],
@@ -312,13 +312,13 @@ impl AppleThemeDemo {
                 row![
                     container(
                         button("Success")
-                            .style(Apple::success_button())
+                            .style(Modern::success_button())
                     )
                     .width(Length::Fill),
                     
                     container(
                         button("Warning")
-                            .style(Apple::warning_button())
+                            .style(Modern::warning_button())
                     )
                     .width(Length::Fill),
                 ],
@@ -328,13 +328,13 @@ impl AppleThemeDemo {
                 row![
                     container(
                         button("Danger")
-                            .style(Apple::danger_button())
+                            .style(Modern::danger_button())
                     )
                     .width(Length::Fill),
                     
                     container(
                         button("System")
-                            .style(Apple::system_button())
+                            .style(Modern::system_button())
                     )
                     .width(Length::Fill),
                 ],
@@ -344,19 +344,19 @@ impl AppleThemeDemo {
                 row![
                     container(
                         button("Link Button")
-                            .style(Apple::link_button())
+                            .style(Modern::link_button())
                     )
                     .width(Length::Fill),
                     
                     container(
                         button("Plain Text")
-                            .style(Apple::plain_button())
+                            .style(Modern::plain_button())
                     )
                     .width(Length::Fill),
                 ],
             ]
         )
-        .style(Apple::card_container())
+        .style(Modern::card_container())
         .padding(15)
         .width(Length::Fill);
         
@@ -369,14 +369,14 @@ impl AppleThemeDemo {
                 row![
                     container(
                         button("Teal Button")
-                            .style(Apple::teal_button())
+                            .style(Modern::teal_button())
                             .on_press(Message::ButtonClicked("Teal"))
                     )
                     .width(Length::Fill),
                     
                     container(
                         button("Indigo Button")
-                            .style(Apple::indigo_button())
+                            .style(Modern::indigo_button())
                             .on_press(Message::ButtonClicked("Indigo"))
                     )
                     .width(Length::Fill),
@@ -386,21 +386,21 @@ impl AppleThemeDemo {
                 row![
                     container(
                         button("Purple Button")
-                            .style(Apple::purple_button())
+                            .style(Modern::purple_button())
                             .on_press(Message::ButtonClicked("Purple"))
                     )
                     .width(Length::Fill),
                     
                     container(
                         button("Pink Button")
-                            .style(Apple::pink_button())
+                            .style(Modern::pink_button())
                             .on_press(Message::ButtonClicked("Pink"))
                     )
                     .width(Length::Fill),
                 ],
             ]
         )
-        .style(Apple::card_container())
+        .style(Modern::card_container())
         .padding(15)
         .width(Length::Fill);
 
@@ -412,33 +412,33 @@ impl AppleThemeDemo {
                 
                 // Plain, Gray, Tinted, Filled heading
                 row![
-                    container(text("Plain").style(Apple::secondary_text()))
+                    container(text("Plain").style(Modern::secondary_text()))
                         .width(Length::Fill)
                         .center_x(Length::Fill),
                     
-                    container(text("Gray").style(Apple::secondary_text()))
+                    container(text("Gray").style(Modern::secondary_text()))
                         .width(Length::Fill)
                         .center_x(Length::Fill),
                     
-                    container(text("Tinted").style(Apple::secondary_text()))
+                    container(text("Tinted").style(Modern::secondary_text()))
                         .width(Length::Fill)
                         .center_x(Length::Fill),
                     
-                    container(text("Filled").style(Apple::secondary_text()))
+                    container(text("Filled").style(Modern::secondary_text()))
                         .width(Length::Fill)
                         .center_x(Length::Fill),
                 ],
                 vertical_space().height(5),
                 
                 // Small buttons row
-                text("Small").size(16).style(Apple::secondary_text()),
+                text("Small").size(16).style(Modern::secondary_text()),
                 vertical_space().height(5),
                 
                 row![
                     // Plain small button
                     container(
                         button(row![text("⏵").shaping(text::Shaping::Advanced), horizontal_space().width(5), text("Play")])
-                            .style(Apple::plain_button())
+                            .style(Modern::plain_button())
                             .on_press(Message::ButtonClicked("Small Plain"))
                             .padding(5)
                     )
@@ -448,7 +448,7 @@ impl AppleThemeDemo {
                     // Gray small button
                     container(
                         button(row![text("⏵").shaping(text::Shaping::Advanced), horizontal_space().width(5), text("Play")])
-                            .style(Apple::gray_button())
+                            .style(Modern::gray_button())
                             .on_press(Message::ButtonClicked("Small Gray"))
                             .padding(5)
                     )
@@ -458,7 +458,7 @@ impl AppleThemeDemo {
                     // Tinted small button
                     container(
                         button(row![text("⏵").shaping(text::Shaping::Advanced), horizontal_space().width(5), text("Play")])
-                            .style(Apple::blue_tinted_button())
+                            .style(Modern::blue_tinted_button())
                             .on_press(Message::ButtonClicked("Small Tinted"))
                             .padding(5)
                     )
@@ -468,7 +468,7 @@ impl AppleThemeDemo {
                     // Filled small button
                     container(
                         button(row![text("⏵").shaping(text::Shaping::Advanced), horizontal_space().width(5), text("Play")])
-                            .style(Apple::primary_button())
+                            .style(Modern::primary_button())
                             .on_press(Message::ButtonClicked("Small Filled"))
                             .padding(5)
                     )
@@ -478,14 +478,14 @@ impl AppleThemeDemo {
                 vertical_space().height(15),
                 
                 // Medium buttons row
-                text("Medium").size(16).style(Apple::secondary_text()),
+                text("Medium").size(16).style(Modern::secondary_text()),
                 vertical_space().height(5),
                 
                 row![
                     // Plain medium button
                     container(
                         button(row![text("⏵").shaping(text::Shaping::Advanced), horizontal_space().width(5), text("Play")])
-                            .style(Apple::plain_button())
+                            .style(Modern::plain_button())
                             .on_press(Message::ButtonClicked("Medium Plain"))
                             .padding(8)
                     )
@@ -495,7 +495,7 @@ impl AppleThemeDemo {
                     // Gray medium button
                     container(
                         button(row![text("⏵").shaping(text::Shaping::Advanced), horizontal_space().width(5), text("Play")])
-                            .style(Apple::gray_button())
+                            .style(Modern::gray_button())
                             .on_press(Message::ButtonClicked("Medium Gray"))
                             .padding(8)
                     )
@@ -505,7 +505,7 @@ impl AppleThemeDemo {
                     // Tinted medium button
                     container(
                         button(row![text("⏵").shaping(text::Shaping::Advanced), horizontal_space().width(5), text("Play")])
-                            .style(Apple::blue_tinted_button())
+                            .style(Modern::blue_tinted_button())
                             .on_press(Message::ButtonClicked("Medium Tinted"))
                             .padding(8)
                     )
@@ -515,7 +515,7 @@ impl AppleThemeDemo {
                     // Filled medium button
                     container(
                         button(row![text("⏵").shaping(text::Shaping::Advanced), horizontal_space().width(5), text("Play")])
-                            .style(Apple::primary_button())
+                            .style(Modern::primary_button())
                             .on_press(Message::ButtonClicked("Medium Filled"))
                             .padding(8)
                     )
@@ -525,14 +525,14 @@ impl AppleThemeDemo {
                 vertical_space().height(15),
                 
                 // Large buttons row
-                text("Large").size(16).style(Apple::secondary_text()),
+                text("Large").size(16).style(Modern::secondary_text()),
                 vertical_space().height(5),
                 
                 row![
                     // Plain large button
                     container(
                         button(row![text("⏵").shaping(text::Shaping::Advanced), horizontal_space().width(5), text("Play")])
-                            .style(Apple::plain_button())
+                            .style(Modern::plain_button())
                             .on_press(Message::ButtonClicked("Large Plain"))
                             .padding(12)
                     )
@@ -542,7 +542,7 @@ impl AppleThemeDemo {
                     // Gray large button
                     container(
                         button(row![text("⏵").shaping(text::Shaping::Advanced), horizontal_space().width(5), text("Play")])
-                            .style(Apple::gray_button())
+                            .style(Modern::gray_button())
                             .on_press(Message::ButtonClicked("Large Gray"))
                             .padding(12)
                     )
@@ -552,7 +552,7 @@ impl AppleThemeDemo {
                     // Tinted large button
                     container(
                         button(row![text("⏵").shaping(text::Shaping::Advanced), horizontal_space().width(5), text("Play")])
-                            .style(Apple::blue_tinted_button())
+                            .style(Modern::blue_tinted_button())
                             .on_press(Message::ButtonClicked("Large Tinted"))
                             .padding(12)
                     )
@@ -562,7 +562,7 @@ impl AppleThemeDemo {
                     // Filled large button
                     container(
                         button(row![text("⏵").shaping(text::Shaping::Advanced), horizontal_space().width(5), text("Play")])
-                            .style(Apple::primary_button())
+                            .style(Modern::primary_button())
                             .on_press(Message::ButtonClicked("Large Filled"))
                             .padding(12)
                     )
@@ -578,21 +578,21 @@ impl AppleThemeDemo {
                 row![
                     container(
                         button("Blue")
-                            .style(Apple::blue_tinted_button())
+                            .style(Modern::blue_tinted_button())
                             .on_press(Message::ButtonClicked("Blue Tinted"))
                     )
                     .width(Length::Fill),
                     
                     container(
                         button("Green")
-                            .style(Apple::green_tinted_button())
+                            .style(Modern::green_tinted_button())
                             .on_press(Message::ButtonClicked("Green Tinted"))
                     )
                     .width(Length::Fill),
                     
                     container(
                         button("Red")
-                            .style(Apple::red_tinted_button())
+                            .style(Modern::red_tinted_button())
                             .on_press(Message::ButtonClicked("Red Tinted"))
                     )
                     .width(Length::Fill),
@@ -602,28 +602,28 @@ impl AppleThemeDemo {
                 row![
                     container(
                         button("Orange")
-                            .style(Apple::orange_tinted_button())
+                            .style(Modern::orange_tinted_button())
                             .on_press(Message::ButtonClicked("Orange Tinted"))
                     )
                     .width(Length::Fill),
                     
                     container(
                         button("Purple")
-                            .style(Apple::purple_tinted_button())
+                            .style(Modern::purple_tinted_button())
                             .on_press(Message::ButtonClicked("Purple Tinted"))
                     )
                     .width(Length::Fill),
                     
                     container(
                         button("Pink")
-                            .style(Apple::pink_tinted_button())
+                            .style(Modern::pink_tinted_button())
                             .on_press(Message::ButtonClicked("Pink Tinted"))
                     )
                     .width(Length::Fill),
                 ],
             ]
         )
-        .style(Apple::card_container())
+        .style(Modern::card_container())
         .padding(15)
         .width(Length::Fill);
 
@@ -637,7 +637,7 @@ impl AppleThemeDemo {
                 container(
                     text("Card Container")
                 ).center_x(Length::Fill)
-                .style(Apple::card_container())
+                .style(Modern::card_container())
                 .padding(10)
                 .width(Length::Fill),
                 vertical_space().height(5),
@@ -646,7 +646,7 @@ impl AppleThemeDemo {
                 container(
                     text("Sheet Container")
                 ).center_x(Length::Fill)
-                .style(Apple::sheet_container())
+                .style(Modern::sheet_container())
                 .padding(10)
                 .width(Length::Fill),
                 vertical_space().height(5),
@@ -655,7 +655,7 @@ impl AppleThemeDemo {
                 container(
                     text("Group Container")
                 ).center_x(Length::Fill)
-                .style(Apple::group_container())
+                .style(Modern::group_container())
                 .padding(10)
                 .width(Length::Fill),
                 vertical_space().height(5),
@@ -664,7 +664,7 @@ impl AppleThemeDemo {
                 container(
                     text("Sidebar Container")
                 ).center_x(Length::Fill)
-                .style(Apple::sidebar_container())
+                .style(Modern::sidebar_container())
                 .padding(10)
                 .width(Length::Fill),
                 vertical_space().height(5),
@@ -673,7 +673,7 @@ impl AppleThemeDemo {
                 container(
                     text("Accent Container")
                 ).center_x(Length::Fill)
-                .style(Apple::accent_container())
+                .style(Modern::accent_container())
                 .padding(10)
                 .width(Length::Fill),
                 vertical_space().height(5),
@@ -682,7 +682,7 @@ impl AppleThemeDemo {
                 container(
                     text("Toolbar Container")
                 ).center_x(Length::Fill)
-                .style(Apple::toolbar_container())
+                .style(Modern::toolbar_container())
                 .padding(10)
                 .width(Length::Fill),
                 vertical_space().height(5),
@@ -691,12 +691,12 @@ impl AppleThemeDemo {
                 container(
                     text("Floating Container")
                 ).center_x(Length::Fill)
-                .style(Apple::floating_container())
+                .style(Modern::floating_container())
                 .padding(10)
                 .width(Length::Fill),
             ]
         )
-        .style(Apple::card_container())
+        .style(Modern::card_container())
         .padding(15)
         .width(Length::Fill);
 
@@ -712,7 +712,7 @@ impl AppleThemeDemo {
                     
                     // Standard text input
                     text_input("Standard text input...", &self.text_value)
-                        .style(Apple::text_input())
+                        .style(Modern::text_input())
                         .on_input(Message::TextInputChanged)
                         .padding(10),
                     vertical_space().height(5),
@@ -720,27 +720,27 @@ impl AppleThemeDemo {
                     // Password input with reveal checkbox
                     row![
                         text_input("Password...", &self.password)
-                            .style(Apple::text_input())
+                            .style(Modern::text_input())
                             .on_input(Message::PasswordChanged)
                             .secure(!self.show_password)
                             .padding(10),
                         horizontal_space().width(10),
                         checkbox("Show", self.show_password)
-                            .style(Apple::checkbox())
+                            .style(Modern::checkbox())
                             .on_toggle(Message::TogglePasswordVisibility),
                     ],
                     vertical_space().height(5),
                     
                     // Search input
                     text_input("Search...", &self.text_value)
-                        .style(Apple::search_input())
+                        .style(Modern::search_input())
                         .on_input(Message::TextInputChanged)
                         .padding(10),
                     vertical_space().height(10),
 
                     // Inline input
                     text_input("Inline input", &self.text_value)
-                        .style(Apple::inline_text_input())
+                        .style(Modern::inline_text_input())
                         .on_input(Message::TextInputChanged),
                     vertical_space().height(10),
                     
@@ -750,13 +750,13 @@ impl AppleThemeDemo {
                     
                     row![
                         checkbox("Unchecked", false)
-                            .style(Apple::checkbox()),
+                            .style(Modern::checkbox()),
                         horizontal_space().width(20),
                         checkbox("Checked", true)
-                            .style(Apple::checkbox()),
+                            .style(Modern::checkbox()),
                         horizontal_space().width(20),
                         checkbox("Interactive", self.checkbox_value)
-                            .style(Apple::checkbox())
+                            .style(Modern::checkbox())
                             .on_toggle(Message::CheckboxToggled),
                     ],
                     vertical_space().height(10),
@@ -772,7 +772,7 @@ impl AppleThemeDemo {
                             self.radio_value, 
                             Message::RadioSelected
                         )
-                        .style(Apple::radio()),
+                        .style(Modern::radio()),
                         horizontal_space().width(20),
                         radio(
                             "Option 2", 
@@ -780,7 +780,7 @@ impl AppleThemeDemo {
                             self.radio_value, 
                             Message::RadioSelected
                         )
-                        .style(Apple::radio()),
+                        .style(Modern::radio()),
                         horizontal_space().width(20),
                         radio(
                             "Option 3", 
@@ -788,7 +788,7 @@ impl AppleThemeDemo {
                             self.radio_value, 
                             Message::RadioSelected
                         )
-                        .style(Apple::radio()),
+                        .style(Modern::radio()),
                     ],
                     vertical_space().height(10),
                     
@@ -797,11 +797,11 @@ impl AppleThemeDemo {
                     vertical_space().height(5),
                     
                     pick_list(
-                        &[Fruit::Apple, Fruit::Banana, Fruit::Orange, Fruit::Pear][..],
+                        &[Fruit::Modern, Fruit::Banana, Fruit::Orange, Fruit::Pear][..],
                         self.fruit_selection,
                         Message::FruitSelected
                     )
-                    .style(Apple::pick_list())
+                    .style(Modern::pick_list())
                     .placeholder("Choose a fruit...")
                     .padding(10),
                     vertical_space().height(10),
@@ -810,30 +810,30 @@ impl AppleThemeDemo {
                     text("Text Styles").size(16),
                     vertical_space().height(5),
                     
-                    text("Primary Text Style").style(Apple::primary_text()),
-                    text("Secondary Text Style").style(Apple::secondary_text()),
-                    text("Tertiary Text Style").style(Apple::tertiary_text()),
-                    text("Link Style Text").style(Apple::link_text()),
+                    text("Primary Text Style").style(Modern::primary_text()),
+                    text("Secondary Text Style").style(Modern::secondary_text()),
+                    text("Tertiary Text Style").style(Modern::tertiary_text()),
+                    text("Link Style Text").style(Modern::link_text()),
                     
                     vertical_space().height(5),
                     row![
-                        text("Red Text").style(Apple::red_text()),
+                        text("Red Text").style(Modern::red_text()),
                         horizontal_space().width(10),
-                        text("Blue Text").style(Apple::blue_text()),
+                        text("Blue Text").style(Modern::blue_text()),
                         horizontal_space().width(10),
-                        text("Green Text").style(Apple::green_text()),
+                        text("Green Text").style(Modern::green_text()),
                     ],
                     vertical_space().height(5),
                     row![
-                        text("Orange Text").style(Apple::orange_text()),
+                        text("Orange Text").style(Modern::orange_text()),
                         horizontal_space().width(10),
-                        text("Purple Text").style(Apple::purple_text()),
+                        text("Purple Text").style(Modern::purple_text()),
                         horizontal_space().width(10),
-                        text("Pink Text").style(Apple::pink_text()),
+                        text("Pink Text").style(Modern::pink_text()),
                     ],
                 ]
             )
-            .style(Apple::card_container())
+            .style(Modern::card_container())
             .padding(15)
             .width(Length::Fill);
 
@@ -912,7 +912,7 @@ fn color_tile<'a>(name: &'a str, light_color: Color, dark_color: Color, current_
 impl std::fmt::Display for Fruit {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Fruit::Apple => write!(f, "Apple"),
+            Fruit::Modern => write!(f, "Modern"),
             Fruit::Banana => write!(f, "Banana"),
             Fruit::Orange => write!(f, "Orange"),
             Fruit::Pear => write!(f, "Pear"),
