@@ -3,6 +3,14 @@
 
 A comprehensive Modern-inspired theme for [Iced](https://github.com/iced-rs/iced), the cross-platform GUI library for Rust.
 
+
+## Light Mode
+![Light Mode Gif](assets/Light Theme.gif)
+
+## Dark Mode
+![Dark Mode Gif](assets/Dark Theme.gif)
+
+
 ## Features
 
 - Complete set of Modern like system colors for both light and dark modes
