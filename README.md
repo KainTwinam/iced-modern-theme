@@ -6,10 +6,10 @@
 A comprehensive Modern-inspired theme for [Iced](https://github.com/iced-rs/iced), the cross-platform GUI library for Rust.
 
 <a href="https://github.com/KainTwinam/iced-modern-theme">
-  <img src="/assets/dark-theme.gif" width="460px">
+  <img src="/assets/dark-theme.gif" width="410px">
 </a>
 <a href="https://github.com/KainTwinam/iced-modern-theme">
-  <img src="/assets/light-theme.gif" width="460px">
+  <img src="/assets/light-theme.gif" width="410px">
 </a>
 
 </div>
