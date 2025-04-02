@@ -1,15 +1,18 @@
+<div align="center">
+
 # Iced Modern Inspired Theme
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 A comprehensive Modern-inspired theme for [Iced](https://github.com/iced-rs/iced), the cross-platform GUI library for Rust.
 
+<a href="https://github.com/KainTwinam/iced-modern-theme">
+  <img src="https://github.com/KainTwinam/iced-modern-theme/assets/Dark Theme.gif" width="460px">
+</a>
+<a href="https://github.com/KainTwinam/iced-modern-theme">
+  <img src="https://github.com/KainTwinam/iced-modern-theme/assets/Light Theme.gif" width="360px">
+</a>
 
-## Light Mode
-![Light Mode Gif](assets/Light Theme.gif)
-
-## Dark Mode
-![Dark Mode Gif](assets/Dark Theme.gif)
-
+</div>
 
 ## Features
 
