@@ -195,7 +195,8 @@ let my_custom_panel = container(content)
 
 ## Credits
 
-This theme is inspired by Apples's Human Interface Guidelines and design system. It aims to provide a familiar and polished look for applications built with Iced.
+This theme is inspired by modern design principles similar to those used in various contemporary operating systems and applications. 
+It is not affiliated with or endorsed by Apple Inc. or any other company.
 
 ## License
 

@@ -7,7 +7,6 @@ use iced::Color;
 
 /// Complete Modern system color palette
 pub mod colors {
-    use iced::Color;
     
     /// mobile system colors - standard variants
     pub mod system {

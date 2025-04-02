@@ -18,7 +18,6 @@ pub mod theme;
 
 pub use colors::*;
 pub use styles::*;
-pub use theme::*;
 
 /// Re-export the Apple struct as the main entry point for the library
 pub use theme::Modern;

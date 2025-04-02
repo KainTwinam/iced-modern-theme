@@ -1,7 +1,7 @@
 use iced::{Element, Task, Theme, Length, Border, Color, Shadow, Background};
 use iced::widget::{
     text, button, container, text_input, column, row, vertical_space, 
-    horizontal_space, radio, checkbox, pick_list, scrollable
+    horizontal_space, radio, checkbox, pick_list, scrollable, combo_box
 };
 
 use iced_modern_theme::Modern;
@@ -20,6 +20,8 @@ struct ModernThemeDemo {
     checkbox_value: bool,
     radio_value: Option<RadioOption>,
     fruit_selection: Option<Fruit>,
+    fruits_combo: combo_box::State<Fruit>,
+    combo_selection: Option<Fruit>,
     password: String,
     show_password: bool,
 }
@@ -39,7 +41,7 @@ enum RadioOption {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum Fruit {
-    Modern,
+    Apple,
     Banana,
     Orange,
     Pear,
@@ -55,6 +57,7 @@ enum Message {
     CheckboxToggled(bool),
     RadioSelected(RadioOption),
     FruitSelected(Fruit),
+    FruitComboSelected(Fruit),
     ButtonClicked(&'static str),
     PrimaryClicked,
     SecondaryClicked,
@@ -75,6 +78,13 @@ impl ModernThemeDemo {
             checkbox_value: false,
             radio_value: None,
             fruit_selection: None,
+            fruits_combo: combo_box::State::new(vec![
+                Fruit::Apple, 
+                Fruit::Banana, 
+                Fruit::Orange, 
+                Fruit::Pear
+            ]),
+            combo_selection: None,
             password: String::new(),
             show_password: false,
         };
@@ -118,6 +128,9 @@ impl ModernThemeDemo {
             Message::ButtonClicked(name) => {
                 // Just for demonstration
                 println!("Button clicked: {}", name);
+            }
+            Message::FruitComboSelected(fruit) => {
+                self.combo_selection = Some(fruit);
             }
             _ => {
                 // Button clicks just for demo
@@ -797,12 +810,28 @@ impl ModernThemeDemo {
                     vertical_space().height(5),
                     
                     pick_list(
-                        &[Fruit::Modern, Fruit::Banana, Fruit::Orange, Fruit::Pear][..],
+                        &[Fruit::Apple, Fruit::Banana, Fruit::Orange, Fruit::Pear][..],
                         self.fruit_selection,
                         Message::FruitSelected
                     )
                     .style(Modern::pick_list())
                     .placeholder("Choose a fruit...")
+                    .padding(10),
+                    vertical_space().height(10),
+
+                    // Combo Box
+                    text("Combo Box").size(16),
+                    vertical_space().height(5),
+
+                    combo_box(
+                        &self.fruits_combo,
+                        "Select a fruit...",
+                        self.combo_selection.as_ref(),
+                        Message::FruitComboSelected
+                    )
+                    .input_style(Modern::combo_box())
+                    .menu_style(Modern::combo_box_menu())
+                    .width(250)
                     .padding(10),
                     vertical_space().height(10),
                     
@@ -912,7 +941,7 @@ fn color_tile<'a>(name: &'a str, light_color: Color, dark_color: Color, current_
 impl std::fmt::Display for Fruit {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Fruit::Modern => write!(f, "Modern"),
+            Fruit::Apple => write!(f, "Apple"),
             Fruit::Banana => write!(f, "Banana"),
             Fruit::Orange => write!(f, "Orange"),
             Fruit::Pear => write!(f, "Pear"),

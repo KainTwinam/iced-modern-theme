@@ -4,6 +4,7 @@
 //! for styling each Iced component with Modern-inspired designs.
 
 use iced::{Border, Color, Shadow, Theme, Background, Vector};
+use iced::overlay::menu;
 
 /// Modern design-inspired text input style implementation
 fn text_input_style(theme: &Theme, status: TextInputStatus) -> text_input::Style {
@@ -96,7 +97,7 @@ fn combo_box_style(theme: &Theme, status: TextInputStatus) -> text_input::Style 
 }
 
 /// Create a complete Modern-styled theme
-fn create_Modern_theme(dark_mode: bool) -> Theme {
+fn create_modern_theme(dark_mode: bool) -> Theme {
     let name = if dark_mode { "Modern Dark" } else { "Modern Light" };
     
     // Define the base colors
@@ -504,14 +505,14 @@ impl Modern {
         pick_list_style
     }
 
-    /// Get an Modern-style theme for combo boxes
+/*     /// Get an Modern-style theme for combo boxes
     pub fn combo_box<'a>() -> impl Fn(&Theme, TextInputStatus) -> text_input::Style + 'a {
         combo_box_style
-    }
+    } */
 
     /// Create a complete Modern-styled theme
     pub fn theme(dark_mode: bool) -> Theme {
-        create_Modern_theme(dark_mode)
+        create_modern_theme(dark_mode)
     }
 
     /// Create a light Modern-styled theme
@@ -1105,6 +1106,31 @@ impl Modern {
     pub fn error_text<'a>() -> impl Fn(&Theme) -> text::Style + 'a {
         Self::red_text()
     }
+
+    /// Get an modern theme for combo boxes
+    pub fn combo_box<'a>() -> impl Fn(&Theme, text_input::Status) -> text_input::Style + 'a {
+        // Use the same style as text_input, since combo_box uses TextInput under the hood
+        text_input_style
+    }
+
+    /// Get a modern theme for combo box menus
+    pub fn combo_box_menu<'a>() -> impl Fn(&Theme) -> menu::Style + 'a {
+        |theme| {
+            let colors = get_theme_colors(theme);
+            
+            menu::Style {
+                text_color: colors.text,
+                background: Background::Color(colors.card_bg),
+                border: Border {
+                    radius: TINY_CORNER_RADIUS.into(),
+                    width: 1.0,
+                    color: colors.input_border,
+                },
+                selected_text_color: Color::WHITE,
+                selected_background: Background::Color(colors.blue),
+            }
+        }
+    }
 }
 
 /// Modern design-inspired button style implementation
@@ -1268,3 +1294,4 @@ fn button_style(theme: &Theme, class: &style::Button, status: ButtonStatus) -> b
         },
     }
 }
+
