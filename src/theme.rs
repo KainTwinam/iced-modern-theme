@@ -978,6 +978,53 @@ impl Modern {
         }
     }
 
+    /// Get an Apple-style theme for text inputs with validation errors
+    pub fn danger_text_input<'a>() -> impl Fn(&Theme, TextInputStatus) -> text_input::Style + 'a {
+        move |theme, status| {
+            let colors = get_theme_colors(theme);
+            
+            // Start with base text input style
+            let base_style = text_input_style(theme, status);
+            
+            // Override with error styling
+            text_input::Style {
+                border: Border {
+                    color: colors.red,  // Use red border for error indication
+                    width: 1.0,
+                    ..base_style.border
+                },
+                // You could add a light red background for increased visibility
+                background: Background::Color(
+                    if is_dark_mode(theme) {
+                        // Darker theme - subtle dark red
+                        Color { r: 0.3, g: 0.0, b: 0.0, a: 0.2 }
+                    } else {
+                        // Light theme - very subtle light red
+                        Color { r: 1.0, g: 0.9, b: 0.9, a: 1.0 }
+                    }
+                ),
+                ..base_style
+            }
+        }
+    }
+    
+    // You could also add a warning style for "caution" cases
+    pub fn warning_text_input<'a>() -> impl Fn(&Theme, TextInputStatus) -> text_input::Style + 'a {
+        move |theme, status| {
+            let colors = get_theme_colors(theme);
+            let base_style = text_input_style(theme, status);
+            
+            text_input::Style {
+                border: Border {
+                    color: colors.orange,  // Orange border for warnings
+                    width: 1.0,
+                    ..base_style.border
+                },
+                ..base_style
+            }
+        }
+    }
+
     /// Get an Modern-style primary text style (main content text)
     pub fn primary_text<'a>() -> impl Fn(&Theme) -> text::Style + 'a {
         |theme| {
