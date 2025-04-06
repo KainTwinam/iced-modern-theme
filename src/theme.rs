@@ -978,7 +978,7 @@ impl Modern {
         }
     }
 
-    /// Get an Apple-style theme for text inputs with validation errors
+    /// Get an modern danger theme for text inputs with validation errors
     pub fn danger_text_input<'a>() -> impl Fn(&Theme, TextInputStatus) -> text_input::Style + 'a {
         move |theme, status| {
             let colors = get_theme_colors(theme);
@@ -1008,7 +1008,7 @@ impl Modern {
         }
     }
     
-    // You could also add a warning style for "caution" cases
+    // Get an modern warning theme for text inputs with validation errors
     pub fn warning_text_input<'a>() -> impl Fn(&Theme, TextInputStatus) -> text_input::Style + 'a {
         move |theme, status| {
             let colors = get_theme_colors(theme);
