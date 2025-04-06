@@ -1007,6 +1007,41 @@ impl Modern {
             }
         }
     }
+
+    /// Dynamically choose between danger, warning and inline text input styles
+    pub fn conditional_text_input<'a>(
+        validation_state: ValidationState
+    ) -> impl Fn(&Theme, TextInputStatus) -> text_input::Style + 'a {
+        move |theme, status| {
+            match validation_state {
+                ValidationState::Error => {
+                    // Call the danger function and immediately apply it
+                    (Self::danger_text_input())(theme, status)
+                },
+                ValidationState::Warning => {
+                    // Call the warning function and immediately apply it
+                    (Self::warning_text_input())(theme, status)
+                },
+                ValidationState::Valid => {
+                    // Call the inline function and immediately apply it
+                    (Self::inline_text_input())(theme, status)
+                }
+            }
+        }
+    }
+
+    // Simple conditional text_input if you don't need/want a warning state
+    pub fn validated_text_input<'a>(
+        has_error: bool
+    ) -> impl Fn(&Theme, TextInputStatus) -> text_input::Style + 'a {
+        move |theme, status| {
+            if has_error {
+                (Self::danger_text_input())(theme, status)
+            } else {
+                (Self::inline_text_input())(theme, status)
+            }
+        }
+    }
     
     // Get an modern warning theme for text inputs with validation errors
     pub fn warning_text_input<'a>() -> impl Fn(&Theme, TextInputStatus) -> text_input::Style + 'a {
@@ -1342,3 +1377,10 @@ fn button_style(theme: &Theme, class: &style::Button, status: ButtonStatus) -> b
     }
 }
 
+// Define an enum for validation states
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum ValidationState {
+    Valid,
+    Warning,
+    Error,
+}
