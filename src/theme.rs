@@ -905,7 +905,7 @@ impl Modern {
                 background: Some(Background::Color(
                     if is_dark_mode(theme) {
                         // Darker theme - subtle dark red background
-                        Color { r: 0.3, g: 0.0, b: 0.0, a: 0.3 }
+                        Color { r: 0.3, g: 0.0, b: 0.0, a: 1.0 }
                     } else {
                         // Light theme - very subtle light red background
                         Color { r: 1.0, g: 0.94, b: 0.94, a: 1.0 }
@@ -935,7 +935,7 @@ impl Modern {
                 background: Some(Background::Color(
                     if is_dark_mode(theme) {
                         // Darker theme - subtle orange-brown background
-                        Color { r: 0.3, g: 0.15, b: 0.0, a: 0.3 }
+                        Color { r: 0.3, g: 0.15, b: 0.0, a: 1.0 }
                     } else {
                         // Light theme - very subtle light orange background
                         Color { r: 1.0, g: 0.96, b: 0.9, a: 1.0 }
