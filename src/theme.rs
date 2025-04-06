@@ -894,6 +894,105 @@ impl Modern {
             }
         }
     }
+
+    /// Get a danger tooltip container style with error styling
+    pub fn danger_tooltip_container<'a>() -> impl Fn(&Theme) -> container::Style + 'a {
+        move |theme| {
+            let colors = get_theme_colors(theme);
+            
+            container::Style {
+                text_color: Some(colors.red),  // Red text for emphasis
+                background: Some(Background::Color(
+                    if is_dark_mode(theme) {
+                        // Darker theme - subtle dark red background
+                        Color { r: 0.3, g: 0.0, b: 0.0, a: 0.3 }
+                    } else {
+                        // Light theme - very subtle light red background
+                        Color { r: 1.0, g: 0.94, b: 0.94, a: 1.0 }
+                    }
+                )),
+                border: Border {
+                    radius: 6.0.into(),  // Slightly rounded corners
+                    width: 1.0,
+                    color: colors.red,  // Red border to match the error theme
+                },
+                shadow: Shadow {
+                    color: Color { a: 0.1, ..Color::BLACK },
+                    offset: Vector::new(0.0, 1.0),
+                    blur_radius: 2.0,
+                },
+            }
+        }
+    }
+
+    /// Get a warning tooltip container style with warning styling
+    pub fn warning_tooltip_container<'a>() -> impl Fn(&Theme) -> container::Style + 'a {
+        move |theme| {
+            let colors = get_theme_colors(theme);
+            
+            container::Style {
+                text_color: Some(colors.orange),  // Orange text for warnings
+                background: Some(Background::Color(
+                    if is_dark_mode(theme) {
+                        // Darker theme - subtle orange-brown background
+                        Color { r: 0.3, g: 0.15, b: 0.0, a: 0.3 }
+                    } else {
+                        // Light theme - very subtle light orange background
+                        Color { r: 1.0, g: 0.96, b: 0.9, a: 1.0 }
+                    }
+                )),
+                border: Border {
+                    radius: 6.0.into(),  // Slightly rounded corners
+                    width: 1.0,
+                    color: colors.orange,  // Orange border to match the warning theme
+                },
+                shadow: Shadow {
+                    color: Color { a: 0.1, ..Color::BLACK },
+                    offset: Vector::new(0.0, 1.0),
+                    blur_radius: 2.0,
+                },
+            }
+        }
+    }
+
+    /// Dynamically choose between danger, warning and standard tooltip container styles
+    pub fn conditional_tooltip_container<'a>(
+        validation_state: ValidationState
+    ) -> impl Fn(&Theme) -> container::Style + 'a {
+        move |theme| {
+            match validation_state {
+                ValidationState::Error => {
+                    // Call the danger function and immediately apply it
+                    (Self::danger_tooltip_container())(theme)
+                },
+                ValidationState::Warning => {
+                    // Call the warning function and immediately apply it
+                    (Self::warning_tooltip_container())(theme)
+                },
+                ValidationState::Valid => {
+                    // Call a standard container style for consistent padding/sizing
+                    // You could use card_container or create a specific info_tooltip_container
+                    (Self::card_container())(theme)
+                }
+            }
+        }
+    }
+
+    ///  Simple conditional container if you don't want / need a warning state
+    pub fn validated_tooltip_container<'a>(
+        has_error: bool
+    ) -> impl Fn(&Theme) -> container::Style + 'a {
+        move |theme| {
+            if has_error {
+                // Call the danger function and immediately apply it
+                (Self::danger_tooltip_container())(theme)
+            } else {
+                // Call a standard container style for consistent padding/sizing
+                (Self::card_container())(theme)
+            }
+        }
+    }
+    
     
     // Text input variants
     
