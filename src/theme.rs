@@ -905,7 +905,7 @@ impl Modern {
                 background: Some(Background::Color(
                     if is_dark_mode(theme) {
                         // Darker theme - subtle dark red background
-                        Color { r: 0.3, g: 0.0, b: 0.0, a: 1.0 }
+                        Color { r: 0.3, g: 0.0, b: 0.0, a: 0.7 }
                     } else {
                         // Light theme - very subtle light red background
                         Color { r: 1.0, g: 0.94, b: 0.94, a: 1.0 }
@@ -935,7 +935,7 @@ impl Modern {
                 background: Some(Background::Color(
                     if is_dark_mode(theme) {
                         // Darker theme - subtle orange-brown background
-                        Color { r: 0.3, g: 0.15, b: 0.0, a: 1.0 }
+                        Color { r: 0.3, g: 0.15, b: 0.0, a: 0.7 }
                     } else {
                         // Light theme - very subtle light orange background
                         Color { r: 1.0, g: 0.96, b: 0.9, a: 1.0 }
@@ -1312,6 +1312,50 @@ impl Modern {
             }
         }
     }
+
+    /// Generic helper to conditionally choose between style functions with the same signature
+    /// 
+    /// This allows you to use conditional styling without opaque type errors.
+    /// 
+    /// # Type Parameters
+    /// - `Args`: The argument type(s) the style function accepts (e.g., `ButtonStatus`)
+    /// - `Output`: The style type the function returns (e.g., `button::Style`)
+    /// 
+    /// # Example
+    /// ```
+    /// // Instead of this (which would cause opaque type errors):
+    /// button.style(if selected { Modern::primary_button() } else { Modern::plain_button() })
+    /// 
+    /// // Do this:
+    /// button.style(Modern::conditional_style(
+    ///     selected,
+    ///     Modern::primary_button(),
+    ///     Modern::plain_button()
+    /// ))
+    /// ```
+    pub fn conditional_style<Args, Output, F>(
+        condition: bool,
+        true_style: F,
+        false_style: F,
+    ) -> impl Fn(Args) -> Output
+    where
+        F: Fn(Args) -> Output,
+    {
+        move |args| {
+            if condition {
+                true_style(args)
+            } else {
+                false_style(args)
+            }
+        }
+    }
+
+    /// Multi-condition version for ValidationState or other enums
+    pub fn match_style<Args, Output, F>(
+        matcher: impl Fn(Args) -> Output,
+    ) -> impl Fn(Args) -> Output {
+        move |args| matcher(args)
+    }
 }
 
 /// Modern design-inspired button style implementation
@@ -1474,6 +1518,7 @@ fn button_style(theme: &Theme, class: &style::Button, status: ButtonStatus) -> b
             }
         },
     }
+    
 }
 
 // Define an enum for validation states
