@@ -808,6 +808,30 @@ impl Modern {
             base_style
         }
     }
+
+
+    /// Create a "selected" version of any button style
+    /// 
+    /// This function takes any button style and creates a modified version where
+    /// the default appearance matches what would normally be the hover state.
+    /// This is perfect for navigation items to show which item is currently selected.
+    pub fn selected_button_style<'a>(
+        base_style_fn: impl Fn(&Theme, ButtonStatus) -> button::Style + 'a
+    ) -> impl Fn(&Theme, ButtonStatus) -> button::Style + 'a {
+        move |theme, status| {
+            let is_dark = is_dark_mode(theme);
+            
+            match status {
+                ButtonStatus::Active => {
+                    // For the active state, use what would normally be the hover state
+                    let base_style = base_style_fn(theme, ButtonStatus::Active);
+                    button_hover_style(base_style, is_dark)
+                },
+                // For other states, use the original style function
+                _ => base_style_fn(theme, status),
+            }
+        }
+    }
     
     // Container variants
     
