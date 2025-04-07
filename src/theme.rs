@@ -1313,48 +1313,50 @@ impl Modern {
         }
     }
 
-    /// Generic helper to conditionally choose between style functions with the same signature
-    /// 
-    /// This allows you to use conditional styling without opaque type errors.
-    /// 
-    /// # Type Parameters
-    /// - `Args`: The argument type(s) the style function accepts (e.g., `ButtonStatus`)
-    /// - `Output`: The style type the function returns (e.g., `button::Style`)
-    /// 
-    /// # Example
-    /// ```
-    /// // Instead of this (which would cause opaque type errors):
-    /// button.style(if selected { Modern::primary_button() } else { Modern::plain_button() })
-    /// 
-    /// // Do this:
-    /// button.style(Modern::conditional_style(
-    ///     selected,
-    ///     Modern::primary_button(),
-    ///     Modern::plain_button()
-    /// ))
-    /// ```
-    pub fn conditional_style<Args, Output, F>(
+    /// Conditional button style helper specifically for button styles
+    pub fn conditional_button_style<'a>(
         condition: bool,
-        true_style: F,
-        false_style: F,
-    ) -> impl Fn(Args) -> Output
-    where
-        F: Fn(Args) -> Output,
-    {
-        move |args| {
+        true_style: impl Fn(&Theme, button::Status) -> button::Style + 'a,
+        false_style: impl Fn(&Theme, button::Status) -> button::Style + 'a,
+    ) -> impl Fn(&Theme, button::Status) -> button::Style + 'a {
+        move |theme, status| {
             if condition {
-                true_style(args)
+                true_style(theme, status)
             } else {
-                false_style(args)
+                false_style(theme, status)
             }
         }
     }
 
-    /// Multi-condition version for ValidationState or other enums
-    pub fn match_style<Args, Output, F>(
-        matcher: impl Fn(Args) -> Output,
-    ) -> impl Fn(Args) -> Output {
-        move |args| matcher(args)
+    // Similar helpers for other widget types
+    /// Conditional text input style helper
+    pub fn conditional_text_input_style<'a>(
+        condition: bool,
+        true_style: impl Fn(&Theme, text_input::Status) -> text_input::Style + 'a,
+        false_style: impl Fn(&Theme, text_input::Status) -> text_input::Style + 'a,
+    ) -> impl Fn(&Theme, text_input::Status) -> text_input::Style + 'a {
+        move |theme, status| {
+            if condition {
+                true_style(theme, status)
+            } else {
+                false_style(theme, status)
+            }
+        }
+    }
+
+    /// Conditional container style helper
+    pub fn conditional_container_style<'a>(
+        condition: bool,
+        true_style: impl Fn(&Theme) -> container::Style + 'a,
+        false_style: impl Fn(&Theme) -> container::Style + 'a,
+    ) -> impl Fn(&Theme) -> container::Style + 'a {
+        move |theme| {
+            if condition {
+                true_style(theme)
+            } else {
+                false_style(theme)
+            }
+        }
     }
 }
 
