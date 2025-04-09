@@ -923,27 +923,36 @@ impl Modern {
     pub fn danger_tooltip_container<'a>() -> impl Fn(&Theme) -> container::Style + 'a {
         move |theme| {
             let colors = get_theme_colors(theme);
-            
+    
+            // Determine if dark mode
+            let dark_mode = is_dark_mode(theme);
+    
             container::Style {
-                text_color: Some(colors.red),  // Red text for emphasis
+                text_color: Some(if dark_mode {
+                    Color::from_rgb(1.0, 0.6, 0.6) // lighter red for better contrast
+                } else {
+                    Color::from_rgb(0.7, 0.0, 0.0) // slightly darker red for better readability
+                }),
                 background: Some(Background::Color(
-                    if is_dark_mode(theme) {
-                        // Darker theme - subtle dark red background
-                        Color { r: 0.3, g: 0.0, b: 0.0, a: 0.7 }
+                    if dark_mode {
+                        Color { r: 0.4, g: 0.1, b: 0.1, a: 0.9 }  // More saturated dark red
                     } else {
-                        // Light theme - very subtle light red background
-                        Color { r: 1.0, g: 0.94, b: 0.94, a: 1.0 }
+                        Color { r: 1.0, g: 0.92, b: 0.92, a: 1.0 }  // softer, clearer red
                     }
                 )),
                 border: Border {
-                    radius: 6.0.into(),  // Slightly rounded corners
+                    radius: 6.0.into(),
                     width: 1.0,
-                    color: colors.red,  // Red border to match the error theme
+                    color: if dark_mode {
+                        Color::from_rgb(0.8, 0.3, 0.3)
+                    } else {
+                        Color::from_rgb(0.9, 0.6, 0.6)
+                    },
                 },
                 shadow: Shadow {
-                    color: Color { a: 0.1, ..Color::BLACK },
+                    color: Color { r: 0.0, g: 0.0, b: 0.0, a: 0.15 },
                     offset: Vector::new(0.0, 1.0),
-                    blur_radius: 2.0,
+                    blur_radius: 3.0,
                 },
             }
         }
