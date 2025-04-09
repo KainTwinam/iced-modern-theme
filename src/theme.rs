@@ -935,7 +935,7 @@ impl Modern {
                 }),
                 background: Some(Background::Color(
                     if dark_mode {
-                        Color { r: 0.4, g: 0.1, b: 0.1, a: 0.9 }  // More saturated dark red
+                        Color { r: 0.4, g: 0.1, b: 0.1, a: 1.0 }  // More saturated dark red
                     } else {
                         Color { r: 1.0, g: 0.92, b: 0.92, a: 1.0 }  // softer, clearer red
                     }
