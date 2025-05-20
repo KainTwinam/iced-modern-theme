@@ -1321,6 +1321,19 @@ impl Modern {
         Self::red_text()
     }
 
+    // Simple conditional text if you don't need/want a warning state
+    pub fn validated_text<'a>(
+        has_error: bool
+    ) -> impl Fn(&Theme) -> text::Style + 'a {
+        move |theme| {
+            if has_error {
+                (Self::error_text())(theme)
+            } else {
+                (Self::success_text())(theme)
+            }
+        }
+    }
+
     /// Get an modern theme for combo boxes
     pub fn combo_box<'a>() -> impl Fn(&Theme, text_input::Status) -> text_input::Style + 'a {
         // Use the same style as text_input, since combo_box uses TextInput under the hood
