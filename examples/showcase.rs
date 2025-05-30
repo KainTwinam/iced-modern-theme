@@ -8,9 +8,9 @@ use iced_modern_theme::Modern;
 use iced_modern_theme::colors::colors;
 
 fn main() -> iced::Result {
-    iced::application("Modern Theme & Colors Showcase", ModernThemeDemo::update, ModernThemeDemo::view)
+    iced::application(ModernThemeDemo::new, ModernThemeDemo::update, ModernThemeDemo::view)
         .theme(ModernThemeDemo::theme)
-        .run_with(ModernThemeDemo::new)
+        .run()
 }
 
 struct ModernThemeDemo {

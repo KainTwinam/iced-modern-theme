@@ -32,7 +32,7 @@ fn text_input_style(theme: &Theme, status: TextInputStatus) -> text_input::Style
             },
             ..base_style
         },
-        TextInputStatus::Focused => text_input::Style {
+        TextInputStatus::Focused  { is_hovered: _ }  => text_input::Style {
             border: Border {
                 color: colors.blue,
                 width: 2.0,
@@ -78,7 +78,7 @@ fn pick_list_style(theme: &Theme, status: pick_list::Status) -> pick_list::Style
             },
             ..base_style
         },
-        pick_list::Status::Opened => pick_list::Style {
+        pick_list::Status::Opened  { is_hovered: _ }  => pick_list::Style {
             border: Border {
                 color: colors.blue,
                 width: 1.5,
@@ -110,6 +110,7 @@ fn create_modern_theme(dark_mode: bool) -> Theme {
     let primary = if dark_mode { MODERN_BLUE_DARK } else { MODERN_BLUE_LIGHT };
     let success = if dark_mode { MODERN_GREEN_DARK } else { MODERN_GREEN_LIGHT };
     let danger = if dark_mode { MODERN_RED_DARK } else { MODERN_RED_LIGHT };
+    let warning = if dark_mode { MODERN_ORANGE_DARK } else { MODERN_ORANGE_LIGHT };
     
     // Create the Modern theme
     Theme::custom(
@@ -120,6 +121,7 @@ fn create_modern_theme(dark_mode: bool) -> Theme {
             primary,
             success,
             danger,
+            warning,
         }
     )
 }
@@ -1050,7 +1052,7 @@ impl Modern {
             match status {
                 TextInputStatus::Active => base_style,
                 TextInputStatus::Hovered => base_style,
-                TextInputStatus::Focused => text_input::Style {
+                TextInputStatus::Focused { is_hovered: _ } => text_input::Style {
                     background: Background::Color(colors.tertiary_background),
                     ..base_style
                 },
@@ -1090,7 +1092,7 @@ impl Modern {
                     },
                     ..base_style
                 },
-                TextInputStatus::Focused => text_input::Style {
+                TextInputStatus::Focused { is_hovered: _ }  => text_input::Style {
                     border: Border {
                         color: colors.blue,
                         width: 2.0,
